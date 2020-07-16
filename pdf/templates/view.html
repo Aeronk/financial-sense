@@ -1,0 +1,272 @@
+{% extends 'index.html' %}
+
+  {% block content %} 
+
+
+      
+
+
+    <h3></h3>
+<br>
+<br>
+<br>
+
+<div class="container">
+
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Income Statement</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Financial Position</a>
+      <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Cash Flow</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div id="income">
+
+        <form method="post" action="/save/" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        <table class="table table-striped">
+          <thead>
+         
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Income Statement For The Period </th>
+              <td><input value="Period Date" type="text" class="form-control" name='year1'  ></td>
+              <td><input value="Period Date" type="text" class="form-control" name='year2'  ></td>
+      
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Revenue</td>
+              {% for value  in revenue %}
+              <td><input value={{value}} type="text" class="form-control" name='revenue{{ forloop.counter}}' id="id_revenue{{ forloop.counter}}" ></td>
+      
+              {% endfor %}
+            </tr>
+      <!--      <tr>
+              <th scope="row">2</th>
+              <td>Total Expenses</td>
+              {% for value  in year %}
+              <td><input type="number" value={{value}} class="form-control" id="y{{ forloop.counter}}" ></td>
+               {% endfor %}
+              
+            </tr>  year,revenue,operations,profitTax,tax,profit  --> 
+            <tr>
+              <th scope="row">3</th>
+              <td>Profit from Operations</td>
+              {% for value  in operations %}
+              <td><input type="text" value={{value}} class="form-control" name="operations{{ forloop.counter}}" ></td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Profit before Tax</td>
+              {% for value  in profitTax %}
+              <td><input type="text" value={{value}} class="form-control" name="profitTax{{ forloop.counter}}" ></td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Tax</td>
+               {% for value  in tax %}
+              <td><input type="text" value={{value}} class="form-control" name="tax{{ forloop.counter}}"></td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Income for the Year</td>
+              {% for value  in profit %}
+              <td><input type="text" value={{value}} class="form-control" name="profit{{ forloop.counter}}"></td>
+              {% endfor %}
+          </tbody>
+        </table>
+
+      
+      
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div id="position">
+
+
+        <table class="table table-striped">
+          <thead>
+         
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Statement Of Financial Position as at </th>
+              <td><input value="Period Date" type="text" class="form-control" name='year1' id='year1'  ></td>
+              <td><input value="Period Date" type="text" class="form-control" name='year2' id='year2'  ></td>
+      
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Fixed Assets</td>
+              {% for value  in totalFixed %}
+              <td><input value={{value}} type="text" class="form-control" name='totalFixed{{ forloop.counter}}' id="id_totalFixed{{ forloop.counter}}" ></td>
+      
+              {% endfor %}
+            </tr>
+      <!--      <tr>
+              <th scope="row">2</th>
+              <td>Total Expenses</td>
+              {% for value  in year %}
+              <td><input type="number" value={{value}} class="form-control" id="y{{ forloop.counter}}" ></td>
+               {% endfor %}
+              
+            </tr>  year,revenue,operations,profitTax,tax,profit  --> 
+            <tr>
+              <th scope="row">3</th>
+              <td>Total Current Assets</td>
+              {% for value  in totalCurrent %}
+              <td><input type="text" value={{value}} class="form-control" name="totalCurrent{{ forloop.counter}}" ></td>
+              {% endfor %}
+            </tr>
+
+            <tr>
+              <th scope="row">3</th>
+              <td>Total  Assets</td>
+              {% for value  in totalAssets %}
+              <td><input type="text" value={{value}} class="form-control" name="totalAssets{{ forloop.counter}}" ></td>
+              {% endfor %}
+            </tr>
+            <tr> 
+              <th scope="row">4</th>
+              <td>Total Equity</td>
+              {% for value  in totalEquity %}
+              <td><input type="text" value={{value}} class="form-control" name="equity{{ forloop.counter}}" ></td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Total Liabilities</td>
+               {% for value  in totalLiab %}
+              <td><input type="text" value={{value}} class="form-control" name="totalLiab{{ forloop.counter}}"></td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Equity and Liabillities</td>
+              {% for value  in totals %}
+              <td><input type="text" value={{value}} class="form-control" name="total{{ forloop.counter}}"></td>
+              {% endfor %}
+          </tbody>
+        </table>
+       
+        
+      
+      
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+      <div id="income">
+
+        <table class="table table-striped">
+          <thead>
+         
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">CashFlow Statement For The Period </th>
+              <td><input value="Period Date" type="text" class="form-control" name='year1'  ></td>
+              <td><input value="Period Date" type="text" class="form-control" name='year2'  ></td>
+      
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Cash generated from operations</td>
+              {% for value  in revenue %}
+              <td><input value={{value}} type="text" class="form-control" name='revenue{{ forloop.counter}}' id="id_revenue{{ forloop.counter}}" ></td>
+      
+              {% endfor %}
+            </tr>
+      <!--      <tr>
+              <th scope="row">2</th>
+              <td>Total Expenses</td>
+              {% for value  in year %}
+              <td><input type="number" value={{value}} class="form-control" id="y{{ forloop.counter}}" ></td>
+               {% endfor %}
+              
+            </tr>  year,revenue,operations,profitTax,tax,profit  --> 
+            <tr>
+              <th scope="row">3</th>
+              <td>Net cash generated from operating activities</td>
+              {% for value  in operations %}
+              <td><input type="text" value={{value}} class="form-control" name="cashOperations{{ forloop.counter}}" ></td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Net cash used in investing activities</td>
+              {% for value  in investing %}
+              <td><input type="text" value={{value}} class="form-control" name="cashInvesting{{ forloop.counter}}" ></td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Net cash flows (used in) / from financing activities</td>
+               {% for value  in financing %}
+              <td><input type="text" value={{value}} class="form-control" name="cashFinancing{{ forloop.counter}}"></td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Cash and cash equivalents at end of year</td>
+              {% for value  in netTotal %}
+              <td><input type="text" value={{value}} class="form-control" name="netBalance{{ forloop.counter}}"></td>
+              {% endfor %}
+          </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      
+      
+      </div>
+    </div>
+  </div>  
+
+
+
+<div class="container">
+     
+    <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0"></h1>
+
+    <hr class="mt-2 mb-5">
+
+    <div class="row text-center text-lg-left">
+
+     {% for x in ngoni %}
+<!--     <div class="col-lg-3 col-md-4 col-6">
+    <a href="#" class="d-block mb-4 h-100">{{forloop.counter}}
+          <img class="img-fluid img-thumbnail" src={{x}} alt="">
+        </a>
+  </div> -->
+        <div class="col-md-3">
+          <div class="card" style="width: 16rem;margin-right:3px;">
+            <img src={{x}} class="card-img-top" alt="fialed to load image">
+          <div class="card-body">
+            <h5 class="card-title">Page: {{forloop.counter}} </h5>
+           
+            <a href="#" class="btn btn-primary">View</a>
+          </div>
+          </div>
+        </div>
+     {% endfor%}
+      </div>
+
+  </div> 
+<!--   
+<div id="my_table" class="tab-content"> {{ ngodza.to_html | safe }} </div>
+</div> --> 
+
+
+   {% endblock %}  

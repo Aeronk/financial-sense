@@ -1,0 +1,156 @@
+{% extends 'index.html' %}
+
+<!-- Page Content -->
+
+  {% block content %} 
+
+<h1></h1>  
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+
+      <th scope="col">Income Statement For the period</th>
+      <th scope="col">{{income.year1}}</th>
+      <th scope="col">{{income.year2}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>Total Revenue</td>
+      <td>{{income.revenue1}}</td>
+      <td>{{income.revenue2}}</td>
+    </tr>
+    <tr>
+
+      <td>Revenue from Operation</td>
+      <td>{{income.operations1}}</td>
+      <td>{{income.operations2}}</td>
+    </tr>
+    <tr>
+
+      <td>Profit Before Tax</td>
+      <td>{{income.profitTax1}}</td>
+      <td>{{income.profitTax2}}</td>
+    </tr>
+    <tr>
+ 
+      <td>Tax</td>
+      <td>{{income.tax1}}</td>
+      <td>{{income.tax2}}</td>
+    </tr>   
+    <tr>
+
+      <td>Profit for The  year</td>
+      <td>{{income.profit1}}</td>
+      <td>{{income.profit2}}</td>
+    </tr>   
+
+    
+  </tbody>
+  <br>
+  <br>
+  <br>
+</table>
+<br>
+<br>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+
+      <th scope="col"> Statement For Financial Position as at </th>
+      <th scope="col">{{position.year1}}</th>
+      <th scope="col">{{position.year2}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>Total Fixed Assets</td>
+      <td>{{position.totalFixed1}}</td>
+      <td>{{position.totalFixed2}}</td>
+    </tr>
+    <tr>
+
+      <td>Total Current Assets</td>
+      <td>{{position.totalCurrent1}}</td>
+      <td>{{position.totalCurrent2}}</td>
+    </tr>
+    <tr>
+
+      <td>Total Assets</td>
+      <td>{{position.totalAssets1}}</td>
+      <td>{{position.totalAssets2}}</td>
+    </tr>
+    <tr>
+ 
+      <td>Total Equity</td>
+      <td>{{position.equity1}}</td>
+      <td>{{position.equity1}}</td>
+    </tr>   
+    <tr>
+
+      <td>Total Liabilities</td>
+      <td>{{position.totalLiab1}}</td>
+      <td>{{position.totalLiab2}}</td>
+    </tr>   
+
+    <tr>
+
+      <td>Total Equities and Liabillities</td>
+      <td>{{position.total1}}</td>
+      <td>{{position.total2}}</td>
+    </tr>
+
+    
+  </tbody>
+</table>
+<br>
+<br>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+
+      <th scope="col"> Statement For Cash Flows For  </th>
+      <th scope="col">{{cash.year1}}</th>
+      <th scope="col">{{cash.year2}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>Net cash generated from operating activities</td>
+      <td>{{cash.cashOperations1}}</td>
+      <td>{{cash.cashOperations2}}</td>
+    </tr>
+    <tr>
+
+      <td>Net cash used in investing activities</td>
+      <td>{{cash.cashInvesting1}}</td>
+      <td>{{cash.cashInvesting2}}</td>
+    </tr>
+    <tr>
+
+      <td>Net cash flows (used in) / from financing activities</td>
+      <td>{{cash.cashFinancing1}}</td>
+      <td>{{cash.cashFinancing2}}</td>
+    </tr>
+    <tr>
+ 
+      <td>Cash and cash equivalents at end of year</td>
+      <td>{{cash.netBalance1}}</td>
+      <td>{{cash.netBalance2}}</td>
+    </tr>   
+
+
+    
+  </tbody>
+</table>
+
+
+ {% endblock %}
+
