@@ -1,0 +1,5 @@
+database = financial_sense
+user = root
+password = 
+default-character-set = utf8
+
