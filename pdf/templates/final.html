@@ -4,153 +4,398 @@
 
   {% block content %} 
 
-<h1></h1>  
+<h1></h1> 
 
-<table class="table table-striped">
-  <thead>
-    <tr>
+<div id="smartwizard">
 
-      <th scope="col">Income Statement For the period</th>
-      <th scope="col">{{income.year1}}</th>
-      <th scope="col">{{income.year2}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
+  <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#step-1">
+          Income Statement 
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#step-2">
+          Statement Of Financial Position
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#step-3">
+          Cashflow Statement
+        </a>
+      </li>
 
-      <td>Total Revenue</td>
-      <td>{{income.revenue1}}</td>
-      <td>{{income.revenue2}}</td>
-    </tr>
-    <tr>
+  </ul>
 
-      <td>Revenue from Operation</td>
-      <td>{{income.operations1}}</td>
-      <td>{{income.operations2}}</td>
-    </tr>
-    <tr>
+  <div class="tab-content">
+      <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+        
+              <th scope="col">Income Statement For the period</th>
+              <th scope="col">{{income.year1}}</th>
+              <th scope="col">{{income.year2}}</th>
+            </tr>
+          </thead>
+          <tbody class="row_position"> 
+            <tr>
+        
+              <td>Total Revenue</td>
+              <td>{{income.revenue1}}</td>
+              <td>{{income.revenue2}}</td>
+            </tr>
+            <tr>
+        
+              <td>Total Expenses</td>
+              <td>{{income.expenses1}}</td>
+              <td>{{income.expenses2}}</td>
+            </tr>
+            <tr>
+        
+              <td>Revenue from Operation</td>
+              <td>{{income.operations1}}</td>
+              <td>{{income.operations2}}</td>
+            </tr>
+            <tr>
+        
+              <td>Profit Before Tax</td>
+              <td>{{income.profitTax1}}</td>
+              <td>{{income.profitTax2}}</td>
+            </tr>
+            <tr>
+         
+              <td>Tax</td>
+              <td>{{income.tax1}}</td>
+              <td>{{income.tax2}}</td>
+            </tr>   
+            <tr>
+        
+              <td>Profit for The  year</td>
+              <td>{{income.profit1}}</td>
+              <td>{{income.profit2}}</td>
+            </tr>   
+            <tr>
+        
+              <td>Earnings per share</td>
+              <td>{{income.earnings1}}</td>
+              <td>{{income.earnings2}}</td>
+            </tr>
+            {% if income.add_value1 %}
+            <tr>
+        
+              <td>{{income.add_name1}}</td>
+              <td>{{income.add_value1}}</td>
+              <td>{{income.add_value2}}</td>
+            </tr>
+            {% endif %}
+            {% if income.add_value3 %}
+            <tr>
+        
+              <td>{{income.add_name2}}</td>
+              <td>{{income.add_value3}}</td>
+              <td>{{income.add_value4}}</td>
+            </tr>
+            {% endif %}
+        
+            
+          </tbody>
 
-      <td>Profit Before Tax</td>
-      <td>{{income.profitTax1}}</td>
-      <td>{{income.profitTax2}}</td>
-    </tr>
-    <tr>
- 
-      <td>Tax</td>
-      <td>{{income.tax1}}</td>
-      <td>{{income.tax2}}</td>
-    </tr>   
-    <tr>
+        </table>
+      </div>
+      <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+        
+              <th scope="col"> Statement For Financial Position as at </th>
+              <th scope="col">{{position.year1}}</th>
+              <th scope="col">{{position.year2}}</th>
+            </tr>
+          </thead>
+          <tbody class="row_position">
+            <tr>
+        
+              <td>Total Fixed Assets</td>
+              <td>{{position.totalFixed1}}</td>
+              <td>{{position.totalFixed2}}</td>
+            </tr>
+            <tr>
+        
+              <td>Total Current Assets</td>
+              <td>{{position.totalCurrent1}}</td>
+              <td>{{position.totalCurrent2}}</td>
+            </tr>
+            <tr>
+        
+              <td>Total Assets</td>
+              <td>{{position.totalAssets1}}</td>
+              <td>{{position.totalAssets2}}</td>
+            </tr>
+            <tr>
+         
+              <td>Total Equity</td>
+              <td>{{position.equity1}}</td>
+              <td>{{position.equity1}}</td>
+            </tr>   
+            <tr>
+        
+              <td>Total Liabilities</td>
+              <td>{{position.totalLiab1}}</td>
+              <td>{{position.totalLiab2}}</td>
+            </tr>   
+        
+            <tr>
+        
+              <td>Total Equities and Liabillities</td>
+              <td>{{position.total1}}</td>
+              <td>{{position.total2}}</td>
+            </tr>
+            {% if position.addB_value1 %}
+            <tr>
+        
+              <td>{{position.addB_name1}}</td>
+              <td>{{position.addB_value1}}</td>
+              <td>{{position.addB_value2}}</td>
+            </tr>
+            {% endif %}
+            {% if position.addB_value3 %}
+            <tr>
+        
+              <td>{{position.addB_name2}}</td>
+              <td>{{position.addB_value3}}</td>
+              <td>{{position.addB_value4}}</td>
+            </tr>
+            {% endif %}
+        
+            
+          </tbody>
+        </table>
+      </div>
+      <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+        
+              <th scope="col"> Statement For Cash Flows For  </th>
+              <th scope="col">{{cash.year1}}</th>
+              <th scope="col">{{cash.year2}}</th>
+            </tr>
+          </thead>
+          <tbody class="row_position" id="try">
+            <tr>
+        
+              <td>Net cash generated from operating activities</td>
+              <td>{{cash.cashOperations1}}</td>
+              <td>{{cash.cashOperations2}}</td>
+            </tr>
+            <tr>
+        
+              <td>Net cash used in investing activities</td>
+              <td>{{cash.cashInvesting1}}</td>
+              <td>{{cash.cashInvesting2}}</td>
+            </tr>
+            <tr>
+        
+              <td>Net cash flows (used in) / from financing activities</td>
+              <td>{{cash.cashFinancing1}}</td>
+              <td>{{cash.cashFinancing2}}</td>
+            </tr>
+            <tr>
+         
+              <td>Cash and cash equivalents at end of year</td>
+              <td>{{cash.netBalance1}}</td>
+              <td>{{cash.netBalance2}}</td>
+            </tr> 
+            {% if cash.addC_value1 %}
+            <tr>
+        
+              <td>{{cash.addC_name1}}</td>
+              <td>{{cash.addC_value1}}</td>
+              <td>{{cash.addC_value2}}</td>
+            </tr>
+            {% endif %}
+            {% if cash.addC_value3 %}
+            <tr>
+        
+              <td>{{cash.addC_name2}}</td>
+              <td>{{cash.addC_value3}}</td>
+              <td>{{cash.addC_value4}}</td>
+            </tr>
+            {% endif %}  
+        
+        
+            
+          </tbody>
+        
+        </table>
+      </div>
+      <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+          Step 4 Content
+      </div>
+  </div>
+</div>
 
-      <td>Profit for The  year</td>
-      <td>{{income.profit1}}</td>
-      <td>{{income.profit2}}</td>
-    </tr>   
 
-    
-  </tbody>
-  <br>
-  <br>
-  <br>
-</table>
 <br>
 <br>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-
-      <th scope="col"> Statement For Financial Position as at </th>
-      <th scope="col">{{position.year1}}</th>
-      <th scope="col">{{position.year2}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-
-      <td>Total Fixed Assets</td>
-      <td>{{position.totalFixed1}}</td>
-      <td>{{position.totalFixed2}}</td>
-    </tr>
-    <tr>
-
-      <td>Total Current Assets</td>
-      <td>{{position.totalCurrent1}}</td>
-      <td>{{position.totalCurrent2}}</td>
-    </tr>
-    <tr>
-
-      <td>Total Assets</td>
-      <td>{{position.totalAssets1}}</td>
-      <td>{{position.totalAssets2}}</td>
-    </tr>
-    <tr>
- 
-      <td>Total Equity</td>
-      <td>{{position.equity1}}</td>
-      <td>{{position.equity1}}</td>
-    </tr>   
-    <tr>
-
-      <td>Total Liabilities</td>
-      <td>{{position.totalLiab1}}</td>
-      <td>{{position.totalLiab2}}</td>
-    </tr>   
-
-    <tr>
-
-      <td>Total Equities and Liabillities</td>
-      <td>{{position.total1}}</td>
-      <td>{{position.total2}}</td>
-    </tr>
-
-    
-  </tbody>
-</table>
-<br>
-<br>
 
 
-<table class="table table-striped">
-  <thead>
-    <tr>
+<div id="#feedbackmessage">
 
-      <th scope="col"> Statement For Cash Flows For  </th>
-      <th scope="col">{{cash.year1}}</th>
-      <th scope="col">{{cash.year2}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
+</div>
 
-      <td>Net cash generated from operating activities</td>
-      <td>{{cash.cashOperations1}}</td>
-      <td>{{cash.cashOperations2}}</td>
-    </tr>
-    <tr>
+<div id="#feedbackmessage">
 
-      <td>Net cash used in investing activities</td>
-      <td>{{cash.cashInvesting1}}</td>
-      <td>{{cash.cashInvesting2}}</td>
-    </tr>
-    <tr>
-
-      <td>Net cash flows (used in) / from financing activities</td>
-      <td>{{cash.cashFinancing1}}</td>
-      <td>{{cash.cashFinancing2}}</td>
-    </tr>
-    <tr>
- 
-      <td>Cash and cash equivalents at end of year</td>
-      <td>{{cash.netBalance1}}</td>
-      <td>{{cash.netBalance2}}</td>
-    </tr>   
+</div>
 
 
-    
-  </tbody>
-</table>
+
+
+
 
 
  {% endblock %}
 
+  {% block javascript %}
+   <script type="text/javascript">
+
+    $(document).ready( function () {
+      $('#MSG').slideUp(3500);
+    });
+
+    $( ".row_position" ).sortable({
+      stop: function() {
+			var selectedData = new Array();
+
+              
+
+            $('.row_position>tr').each(function() {
+
+                selectedData.push($(this).attr("id"));
+
+            });
+
+            updateOrder(selectedData);
+
+        }
+
+    });
+
+
+    function updateOrder(data) {
+
+        $.ajax({
+
+            url:"<?php echo base_url('Welcome/updateMenu');?>",
+
+            type:'post',
+
+            data:{position:data},
+
+            success:function(result){
+            	window.location.reload();
+             }
+
+        })
+
+    }
+
+</script>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $("#try"); //Fields wrapper
+    var add_button      = $("#add_field_button"); //Add button ID
+   
+
+ 
+    
+  
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment//add input box
+            $(wrapper).append(
+             '<tr><td><input type="text"  class="form-control"  value="Form" name="name"></td><td><input type="text" value="" class="form-control" name="value1"></td><td><input type="text" value="ngoni" class="form-control" name="value2"></td></tr>'
+            );
+        }
+    });
+  
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+  });
+
+  $(document).ready( function () {
+    $('#MSG').slideUp(3500);
+  });
+ 
+  $( ".row_position_income" ).sortable({
+    stop: function() {
+    var selectedData = new Array();
+    return selectedData;
+ 
+            
+ 
+          $('.row_position>tr').each(function() {
+ 
+              selectedData.push($(this).attr("id"));
+ 
+          });
+ 
+          updateOrder(selectedData);
+ 
+      }
+ 
+  });
+ 
+ 
+  
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    $("#myform").submit(function(event) {
+       event.preventDefault();
+       $.ajax({ data: $(this).serialize(), 
+                type: $(this).attr('method'), 
+                url: $(this).attr('action'), 
+                success: function(response) {
+                     console.log(response);
+                     if(response['success']) {
+                         $("#feedbackmessage").html("<div class='alert alert-success'>Succesfully sent feedback, thank you!</div>");
+                         $("#myform").addClass("hidden");
+                     } 
+                     if(response['error']) {
+                         $("#feedbackmessage").html("<div class='alert alert-danger'>" +
+                         response['error']['comment'] +"</div>");
+                     } 
+                },
+                error: function (request, status, error) {
+                     console.log(request.responseText);
+                }
+       });
+   });
+})
+
+
+ 
+ </script>
+
+ <script type="text/javascript">
+  $(document).ready(function() {
+  
+      $('#smartwizard').smartWizard();
+  
+  });
+  </script>
+
+
+  {% endblock javascript %}

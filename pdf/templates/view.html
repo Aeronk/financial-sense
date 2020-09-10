@@ -24,7 +24,7 @@
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
       <div id="income">
 
-        <form method="post" action="/save/" enctype="multipart/form-data" class="form">
+        <form method="post" action="/save/"  enctype="multipart/form-data" class="form" id="post-form1">
         {% csrf_token %}
         <table class="table table-striped">
           <thead>
@@ -38,7 +38,7 @@
               
             </tr>
           </thead>
-          <tbody>
+          <tbody   id="try">
             <tr>
               <th scope="row">1</th>
               <td>Total Revenue</td>
@@ -46,6 +46,15 @@
               <td><input value={{value}} type="text" class="form-control" name='revenue{{ forloop.counter}}' id="id_revenue{{ forloop.counter}}" ></td>
       
               {% endfor %}
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Expenses</td>
+
+              <td><input value=0 type="text" class="form-control" name='expenses1'  ></td>
+              <td><input value=1 type="text" class="form-control" name='expenses2'  ></td>
+      
+
             </tr>
       <!--      <tr>
               <th scope="row">2</th>
@@ -82,8 +91,17 @@
               {% for value  in profit %}
               <td><input type="text" value={{value}} class="form-control" name="profit{{ forloop.counter}}"></td>
               {% endfor %}
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Earnings Per Share</td>
+                <td><input value=0 type="text" class="form-control" name='earnings1'  ></td>
+                <td><input value=0 type="text" class="form-control" name='earnings2'  ></td>    
+              </tr>
           </tbody>
         </table>
+        <button type="submit" id="add_field_button" class="btn btn-primary">Add Form</button>
+
 
       
       
@@ -105,7 +123,7 @@
               
             </tr>
           </thead>
-          <tbody>
+          <tbody id="try_balance">
             <tr>
               <th scope="row">1</th>
               <td>Total Fixed Assets</td>
@@ -159,6 +177,7 @@
               {% endfor %}
           </tbody>
         </table>
+        <button type="submit" id="add_balance_button" class="btn btn-primary">Add Form</button>
        
         
       
@@ -180,7 +199,7 @@
               
             </tr>
           </thead>
-          <tbody>
+          <tbody class="row_position" id="try_cash">
             <tr>
               <th scope="row">1</th>
               <td>Cash generated from operations</td>
@@ -224,13 +243,20 @@
               {% for value  in netTotal %}
               <td><input type="text" value={{value}} class="form-control" name="netBalance{{ forloop.counter}}"></td>
               {% endfor %}
+            </tr>
+            
           </tbody>
         </table>
         <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <button type="submit" id="add_cash_button" class="btn btn-primary">Add Form</button>
+       
+
+
+       
       
       
       </div>
+    </form>
     </div>
   </div>  
 
@@ -270,3 +296,268 @@
 
 
    {% endblock %}  
+
+   {% block javascript %}
+   <script type="text/javascript">
+
+    $(document).ready( function () {
+      $('#MSG').slideUp(3500);
+    });
+
+    $( ".row_position" ).sortable({
+      stop: function() {
+      var selectedData = new Array();
+      return selectedData;
+
+              
+
+            $('.row_position>tr').each(function() {
+
+                selectedData.push($(this).attr("id"));
+
+            });
+
+            updateOrder(selectedData);
+
+        }
+
+    });
+
+
+    function updateOrder(data) {
+
+        $.ajax({
+
+            url:"<?php echo base_url('Welcome/updateMenu');?>",
+
+            type:'post',
+
+            data:{position:data},
+
+            success:function(result){
+            	window.location.reload();
+             }
+
+        })
+
+    }
+
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $("#try"); //Fields wrapper
+    var add_button      = $("#add_field_button"); //Add button ID
+   
+
+ 
+    
+  
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment//add input box
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="add_name1"></td><td><input type="text"  class="form-control" name="add_value1"></td><td><input type="text"  class="form-control" name="add_value2"></td></tr>'
+            );
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="add_name2"></td><td><input type="text"  class="form-control" name="add_value3"></td><td><input type="text"  class="form-control" name="add_value4"></td></tr>'
+            );
+        }
+    });
+  
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+  });
+
+   $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $("#try_balance"); //Fields wrapper
+    var add_button      = $("#add_balance_button"); //Add button ID
+   
+
+ 
+    
+  
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment//add input box
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="addB_name1"></td><td><input type="text"  class="form-control" name="addB_value1"></td><td><input type="text"  class="form-control" name="addB_value2"></td></tr>'
+            );
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="addB_name2"></td><td><input type="text"  class="form-control" name="addB_value3"></td><td><input type="text"  class="form-control" name="addB_value4"></td></tr>'
+            );
+        }
+    });
+  
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+  });
+
+  
+</script>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $("#try_cash"); //Fields wrapper
+    var add_button      = $("#add_cash_button"); //Add button ID
+   
+
+ 
+    
+  
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment//add input box
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="addC_name1"></td><td><input type="text"  class="form-control" name="addC_value1"></td><td><input type="text"  class="form-control" name="addC_value2"></td></tr>'
+            );
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="addC_name2"></td><td><input type="text"  class="form-control" name="addC_value3"></td><td><input type="text"  class="form-control" name="addC_value4"></td></tr>'
+            );
+        }
+    });
+  
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+  });
+
+  
+</script>
+
+
+<script type="text/javascript">
+
+ $(document).ready( function () {
+   $('#MSG').slideUp(3500);
+ });
+
+ $( ".row_position_balance" ).sortable({
+   stop: function() {
+   var selectedData = new Array();
+   return selectedData;
+
+           
+
+         $('.row_position>tr').each(function() {
+
+             selectedData.push($(this).attr("id"));
+
+         });
+
+         updateOrder(selectedData);
+
+     }
+
+ });
+
+
+ function updateOrder(data) {
+
+     $.ajax({
+
+         url:"<?php echo base_url('Welcome/updateMenu');?>",
+
+         type:'post',
+
+         data:{position:data},
+
+         success:function(result){
+           window.location.reload();
+          }
+
+     })
+
+ }
+
+</script>
+
+
+
+
+
+ <script type="text/javascript">
+
+  $(document).ready(function() {
+    $("#post-form1").submit(function(event) {
+       event.preventDefault();
+       $.ajax({ data: $(this).serialize(), 
+                type: $(this).attr('method'), 
+                url: $(this).attr('action'), 
+                success: function(response) {
+                     console.log(response);
+                     if(response['success']) {
+                         $("#feedbackmessage").html("<div class='alert alert-success'>
+                                       Succesfully sent feedback, thank you!</div>");
+                         $("#feedbackform").addClass("hidden");
+                     } 
+                     if(response['error']) {
+                         $("#feedbackmessage").html("<div class='alert alert-danger'>" +
+                         response['error']['comment'] +"</div>");
+                     } 
+                },
+                error: function (request, status, error) {
+                     console.log(request.responseText);
+                }
+       });
+   });
+})
+
+
+
+
+
+
+ 
+ 
+ 
+ </script>
+
+
+ <script>
+
+  $(document).ready(function() {
+      $("#feedbackform").submit(function(event) {
+         event.preventDefault();
+         $.ajax({ data: $(this).serialize(), 
+                  type: $(this).attr('method'), 
+                  url: $(this).attr('action'), 
+                  success: function(response) {
+                       console.log(response);
+                       if(response['success']) {
+                           $("#feedbackmessage").html("<div class='alert alert-success'>
+                                         Succesfully sent feedback, thank you!</div>");
+                           $("#feedbackform").addClass("hidden");
+                       } 
+                       if(response['error']) {
+                           $("#feedbackmessage").html("<div class='alert alert-danger'>" +
+                           response['error']['comment'] +"</div>");
+                       } 
+                  },
+                  error: function (request, status, error) {
+                       console.log(request.responseText);
+                  }
+         });
+     });
+  })
+
+
+</script>
+
+ 
+
+  {% endblock javascript %}
+
+ 

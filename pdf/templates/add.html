@@ -1,0 +1,358 @@
+{% extends 'index.html' %}
+
+<!-- Page Content -->
+
+{% block content %} 
+<br>
+<br>
+<br>
+<div id="smartwizard">
+
+    <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#step-1">
+            Step 1 <br><small>Income Statement</small>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#step-2">
+            Step 2<br><small>CashFlow Statement</small>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#step-3">
+            Step 3<br><small>Statement Of Fiancial Statement</small>
+          </a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+        <form method="post" action="/save/"  enctype="multipart/form-data" class="form" id="post-form1">
+        {% csrf_token %}
+        <table class="table table-striped">
+          <thead>
+         
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Income Statement For The Period </th>
+              <td><input value="Period Date" type="text" class="form-control" name='year1'  ></td>
+              <td><input value="Period Date" type="text" class="form-control" name='year2'  ></td>
+      
+              
+            </tr>
+          </thead>
+          <tbody   id="try">
+
+           {% csrf_token %}
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Revenue</td>
+
+              <td><input value=0 type="text" class="form-control" name='revenue1'  ></td>
+              <td><input value=1 type="text" class="form-control" name='revenue2'  ></td>
+      
+
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Expenses</td>
+
+              <td><input value=0 type="text" class="form-control" name='expenses1'  ></td>
+              <td><input value=1 type="text" class="form-control" name='expenses2'  ></td>
+      
+
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Profit from Operations</td>
+              <td><input type="text" value=0 class="form-control" name="operations1" ></td>
+              <td><input type="text" value=0 class="form-control" name="operations2" ></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Profit before Tax</td>
+
+              <td><input type="text" value=0 class="form-control" name="profitTax1" ></td>
+              <td><input type="text" value=0 class="form-control" name="profitTax2" ></td>
+
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Tax</td>
+              <td><input type="text" value=0 class="form-control" name="tax1"></td>
+              <td><input type="text" value=0 class="form-control" name="tax2"></td>
+
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Income for the Year</td>
+              <td><input type="text" value=0 class="form-control" name="profit1"></td>
+              <td><input type="text" value=0 class="form-control" name="profit2"></td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Earnings Per Share</td>
+              <td><input value=0 type="text" class="form-control" name='earnings1'  ></td>
+              <td><input value=0 type="text" class="form-control" name='earnings2'  ></td>    
+            </tr>
+          </tbody>
+
+        </table>
+        <br>
+        <br>
+        <button type="submit" id="add_field_button" class="btn btn-primary">Add Form</button>
+
+        </div>
+        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+        <table class="table table-striped">
+          <thead>
+         
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Statement Of Financial Position as at </th>
+              <td><input value="Period Date" type="text" class="form-control" name='year1' id='year1'  ></td>
+              <td><input value="Period Date" type="text" class="form-control" name='year2' id='year2'  ></td>
+      
+              
+            </tr>
+          </thead>
+          <tbody id="try_balance">
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Fixed Assets</td>
+              <td><input value=0 type="text" class="form-control" name='totalFixed1' id="id_totalFixed1" ></td>
+              <td><input value=0 type="text" class="form-control" name='totalFixed2' id="id_totalFixed" ></td>
+      
+            
+            </tr>
+      <!--      <tr>
+              <th scope="row">2</th>
+              <td>Total Expenses</td>
+              {% for value  in year %}
+              <td><input type="number" value={{value}} class="form-control" id="y{{ forloop.counter}}" ></td>
+               {% endfor %}
+              
+            </tr>  year,revenue,operations,profitTax,tax,profit  --> 
+            <tr>
+              <th scope="row">3</th>
+              <td>Total Current Assets</td>
+               <td><input type="text" value=0 class="form-control" name="totalCurrent1" ></td>
+              <td><input type="text" value=0 class="form-control" name="totalCurrent2" ></td>
+
+            </tr>
+
+            <tr>
+              <th scope="row">3</th>
+              <td>Total  Assets</td>
+              <td><input type="text" value=0 class="form-control" name="totalAssets1" ></td>
+              <td><input type="text" value=0 class="form-control" name="totalAssets2" ></td>
+            </tr>
+            <tr> 
+              <th scope="row">4</th>
+              <td>Total Equity</td>
+              <td><input type="text" value=0 class="form-control" name="equity1" ></td>
+              <td><input type="text" value=0 class="form-control" name="equity2" ></td>
+
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Total Liabilities</td>
+              <td><input type="text" value=0 class="form-control" name="totalLiab1"></td>
+              <td><input type="text" value=0 class="form-control" name="totalLiab2"></td>
+
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Equity and Liabillities</td>
+              <td><input type="text" value=0 class="form-control" name="total1"></td>
+              <td><input type="text" value=0 class="form-control" name="total2"></td>
+
+          </tbody>
+        </table>
+            <button type="submit" id="add_balance_button" class="btn btn-primary">Add Form</button>
+        </div>
+        <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+        <table class="table table-striped">
+          <thead>
+         
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">CashFlow Statement For The Period </th>
+              <td><input value="Period Date" type="text" class="form-control" name='year1'  ></td>
+              <td><input value="Period Date" type="text" class="form-control" name='year2'  ></td>
+      
+              
+            </tr>
+          </thead>
+          <tbody class="row_position" id="try_cash" >
+            <tr>
+              <th scope="row">1</th>
+              <td>Cash generated from operations</td>
+              <td><input value=0 type="text" class="form-control" name='revenue1'  ></td>
+              <td><input value=0 type="text" class="form-control" name='revenue2'  ></td>
+
+            </tr>
+      <!--      <tr>
+              <th scope="row">2</th>
+              <td>Total Expenses</td>
+              {% for value  in year %}
+              <td><input type="number" value={{value}} class="form-control" id="y{{ forloop.counter}}" ></td>
+               {% endfor %}
+              
+            </tr>  year,revenue,operations,profitTax,tax,profit  --> 
+            <tr>
+              <th scope="row">3</th>
+              <td>Net cash generated from operating activities</td>
+              <td><input type="text" value=0 class="form-control" name="cashOperations1" ></td>
+              <td><input type="text" value=0 class="form-control" name="cashOperations2" ></td>
+
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Net cash used in investing activities</td>
+              <td><input type="text" value=0 class="form-control" name="cashInvesting1" ></td>
+              <td><input type="text" value=0 class="form-control" name="cashInvesting2" ></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Net cash flows (used in) / from financing activities</td>
+              <td><input type="text" value=0 class="form-control" name="cashFinancing1"></td>
+              <td><input type="text" value=0 class="form-control" name="cashFinancing2"></td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Cash and cash equivalents at end of year</td>
+              <td><input type="text" value=0 class="form-control" name="netBalance1"></td>
+              <td><input type="text" value=0 class="form-control" name="netBalance2"></td>
+            </tr>
+            
+          </tbody>
+        </table>
+        <button type="submit" id="add_cash_button" class="btn btn-primary">Add Form</button>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+              
+        </div>
+        <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+            Step 4 Content
+        </div>
+    </div>
+</div>
+  
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $('#smartwizard').smartWizard();
+    
+
+
+});
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $("#try"); //Fields wrapper
+    var add_button      = $("#add_field_button"); //Add button ID
+   
+
+ 
+    
+  
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment//add input box
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="add_name1"></td><td><input type="text"  class="form-control" name="add_value1"></td><td><input type="text"  class="form-control" name="add_value2"></td></tr>'
+            );
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="add_name2"></td><td><input type="text"  class="form-control" name="add_value3"></td><td><input type="text"  class="form-control" name="add_value4"></td></tr>'
+            );
+        }
+    });
+  
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+  });
+
+   $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $("#try_balance"); //Fields wrapper
+    var add_button      = $("#add_balance_button"); //Add button ID
+   
+
+ 
+    
+  
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment//add input box
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="addB_name1"></td><td><input type="text"  class="form-control" name="addB_value1"></td><td><input type="text"  class="form-control" name="addB_value2"></td></tr>'
+            );
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="addB_name2"></td><td><input type="text"  class="form-control" name="addB_value3"></td><td><input type="text"  class="form-control" name="addB_value4"></td></tr>'
+            );
+        }
+    });
+  
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+  });
+
+  
+</script>
+<script type="text/javascript">
+
+ 
+
+  
+</script>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $("#try_cash"); //Fields wrapper
+    var add_button      = $("#add_cash_button"); //Add button ID
+   
+
+ 
+    
+  
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment//add input box
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="addC_name1"></td><td><input type="text"  class="form-control" name="addC_value1"></td><td><input type="text"  class="form-control" name="addC_value2"></td></tr>'
+            );
+            $(wrapper).append(
+             '<tr><th scope="row">0</th><td><input type="text"  class="form-control"  value="Add Field" name="addC_name2"></td><td><input type="text"  class="form-control" name="addC_value3"></td><td><input type="text"  class="form-control" name="addC_value4"></td></tr>'
+            );
+        }
+    });
+  
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+  });
+
+  
+</script>
+{% endblock javascript %}

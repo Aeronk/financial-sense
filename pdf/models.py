@@ -22,6 +22,16 @@ class IncomeStatement(models.Model):
     profit1 = models.CharField(max_length=100, null=True)
     profit2 = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    earnings1 = models.CharField(max_length=20, null=True)
+    earnings2 = models.CharField(max_length=20, null=True)
+    expenses1 = models.CharField(max_length=20, null=True)
+    expenses2 = models.CharField(max_length=20, null=True)
+    add_name1 = models.CharField(max_length=20, null=True,blank=True)
+    add_name2 = models.CharField(max_length=20, null=True,blank=True)
+    add_value1 = models.CharField(max_length=20, null=True,blank=True)
+    add_value2 = models.CharField(max_length=20, null=True,blank=True)
+    add_value3 = models.CharField(max_length=20, null=True,blank=True)
+    add_value4 = models.CharField(max_length=20, null=True,blank=True)
 
     def __str__(self):
         return self.year1
@@ -42,6 +52,13 @@ class PositionStatemement(models.Model):
     total1 = models.CharField(max_length=20, null=True)
     total2 = models.CharField(max_length=20, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    addB_name1 = models.CharField(max_length=20, null=True,blank=True)
+    addB_name2 = models.CharField(max_length=20, null=True,blank=True)
+    addB_value1 = models.CharField(max_length=20, null=True,blank=True)
+    addB_value2 = models.CharField(max_length=20, null=True,blank=True)
+    addB_value3 = models.CharField(max_length=20, null=True,blank=True)
+    addB_value4 = models.CharField(max_length=20, null=True,blank=True)
+    
 
 
     def __str__(self):
@@ -59,7 +76,23 @@ class CashflowStatemement(models.Model):
     netBalance1 = models.CharField(max_length=20, null=True)
     netBalance2 = models.CharField(max_length=20, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    addC_name1 = models.CharField(max_length=20, null=True,blank=True)
+    addC_name2 = models.CharField(max_length=20, null=True,blank=True)
+    addC_value1 = models.CharField(max_length=20, null=True,blank=True)
+    addC_value2 = models.CharField(max_length=20, null=True,blank=True)
+    addC_value3 = models.CharField(max_length=20, null=True,blank=True)
+    addC_value4 = models.CharField(max_length=20, null=True,blank=True)
 
     def __str__(self):
         return self.year1        
+
+class  AddField(models.Model):
+    name = models.CharField(max_length=20, null=True)
+    value1 = models.CharField(max_length=200, null=True)
+    value2 = models.CharField(max_length=200, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+   
+    def __str__(self):
+        return self.name 
+
 

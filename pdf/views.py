@@ -1,16 +1,17 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404,redirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views import generic
 from django.http import JsonResponse
 from django.core import serializers
 from .models import IncomeStatement,PositionStatemement,CashflowStatemement
 from django.utils import timezone
-from .forms import IncomeStatementForm,PositionStatementForm,CashflowStatementForm,ImageForm
+from .forms import IncomeStatementForm,PositionStatementForm,CashflowStatementForm,ImageForm,AddFieldForm
 import tabula
 import numpy as np
 import pandas as pd
 import re
+import os
 # Read pdf into list of DataFrame
 
 
@@ -21,6 +22,11 @@ import tempfile
 
 from pdf2image import convert_from_path
 # Create your views here.
+
+def convertDF(excel):
+    customers = pd.read_excel(excel)
+    return customers
+
 
 def Exract(pdf_file):
     df = tabula.read_pdf(pdf_file, pages='3')
@@ -179,7 +185,7 @@ def display(request):
             ngoni = convertImage(img_obj.file.path)
             print("2nd Dictionary is : ",ngoni)
             ngodza = Exract(img_obj.file.path)
-            images_from_path = convert_from_path("E:/ngoni/edgars.pdf", fmt="jpeg")
+            #images_from_path = convert_from_path("E:/ngoni/edgars.pdf", fmt="jpeg")
             return render(request, 'form.html', {'form':form,'ngoni': ngoni, 'ngodza': ngodza})
         print('form invalid')    
     form = ImageForm()
@@ -196,23 +202,37 @@ def view(request):
             img_obj = form.instance
             print("now printing obj Image")
             print(str(img_obj.file.url))
+            filename, file_extension = os.path.splitext(img_obj.file.path)
+            if(file_extension=='.xls'):
+                drop = convertDF(img_obj.file.path)
+                pos = drop
+                cash = drop
+                ngoni =[]
+                ngodza = []
+
+            else:
+                ngoni = convertImage(img_obj.file.path)
+                ngodza = Exract(img_obj.file.path)
+                muna = ExtractBalance(img_obj.file.path)
+                nyasha =ExtractCash(img_obj.file.path)
+                drop = Clean(ngodza)
+                pos = Clean(muna)
+                cash = Clean(nyasha)
+
+
 
             print("------------------------")
             print("now converting pdf")
-            ngoni = convertImage(img_obj.file.path)
-            ngodza = Exract(img_obj.file.path)
-            muna = ExtractBalance(img_obj.file.path)
-            nyasha =ExtractCash(img_obj.file.path)
 
-
-            print(ngodza)
-            print(muna)
-            print("-------------- Finished Extracting ---------------------------------")
-            drop = Clean(ngodza)
-            pos = Clean(muna)
-            cash = Clean(nyasha)
             
-            print(drop)
+
+
+
+
+            print("-------------- Finished Extracting ---------------------------------")
+
+            
+
             print("-------------- Finished cleaning ---------------------------------")
             look = SearchIncome(drop)
             sheet = SearchBalance(pos)
@@ -221,8 +241,8 @@ def view(request):
             print(look)
             print(sheet)
             print("-------------- Finished searching ---------------------------------")
-            print("2nd Dictionary is : ",ngoni)
-            ngodza = Exract(img_obj.file.path)
+            #print("2nd Dictionary is : ",ngoni)
+            #ngodza = Exract(img_obj.file.path)
             
             print("-------------------Now Printing Year---------------------------")
             year = look[0]
@@ -263,6 +283,7 @@ def index(request):
 
 def save(request):
     if request.method == 'POST':
+ 
         form = IncomeStatementForm(request.POST)
         form2 = PositionStatementForm(request.POST)
         form3 = CashflowStatementForm(request.POST)
@@ -276,6 +297,8 @@ def save(request):
             obj.year2 = form.cleaned_data['year2']
             obj.revenue1 = form.cleaned_data['revenue1']
             obj.revenue2 = form.cleaned_data['revenue2']
+            obj.expenses1 = form.cleaned_data['expenses1']
+            obj.expenses2 = form.cleaned_data['expenses2']
             obj.operations1 = form.cleaned_data['operations1']
             obj.operations2 = form.cleaned_data['operations2']
             obj.profitTax1 = form.cleaned_data['profitTax1']
@@ -284,8 +307,17 @@ def save(request):
             obj.tax2 = form.cleaned_data['tax2']
             obj.profit1 = form.cleaned_data['profit1']
             obj.profit2 = form.cleaned_data['profit2']
+            obj.earnings1 = form.cleaned_data['earnings1']
+            obj.earnings2 = form.cleaned_data['earnings1']
+            obj.add_name1 = form.cleaned_data['add_name1']
+            obj.add_name2 = form.cleaned_data['add_name2']
+            obj.add_value1 = form.cleaned_data['add_value1']
+            obj.add_value2 = form.cleaned_data['add_value2']
+            obj.add_value3 = form.cleaned_data['add_value3']
+            obj.add_value4 = form.cleaned_data['add_value4']
 
               #gets new object
+            obj.save()  
 
             cash = PositionStatemement()  
 
@@ -304,6 +336,12 @@ def save(request):
             cash.totalLiab2 = form2.cleaned_data['totalLiab2']
             cash.total1 = form2.cleaned_data['total1']
             cash.total2 = form2.cleaned_data['total2']
+ #           cash.addB_name1 = form.cleaned_data['addB_name1']
+ #           cash.addB_name2 = form.cleaned_data['addB_name2']
+ #           cash.addB_value1 = form.cleaned_data['addB_value1']
+ #           cash.addB_value2 = form.cleaned_data['addB_value2']
+ #           cash.addB_value3 = form.cleaned_data['addB_value3']
+ #           cash.addB_value4 = form.cleaned_data['addB_value4']
 
             #finally save the object in db
             cash.save()
@@ -321,6 +359,12 @@ def save(request):
             cash1.cashFinancing2 = form3.cleaned_data['cashFinancing2']
             cash1.netBalance1 = form3.cleaned_data['netBalance1']
             cash1.netBalance2 = form3.cleaned_data['netBalance2']
+#            cash1.addC_name1 = form3.cleaned_data['addC_name1']
+#            cash1.addC_name2 = form3.cleaned_data['addC_name2']
+#            cash1.addC_value1 = form3.cleaned_data['addC_value1']
+#            cash1.addC_value2 = form3.cleaned_data['addC_value2']
+#            cash1.addC_value3 = form3.cleaned_data['addC_value3']
+#            cash1.addC_value4 = form3.cleaned_data['addC_value4']
 
             #finally save the object in db
             cash1.save()
@@ -340,5 +384,75 @@ def save(request):
     form = ImageForm()
     return render(request, 'form.html', {'form': form})
 
+def saveIncome(request):
+    response_data = {}
+    #form = IncomeStatementForm(request.POST)
+    
+
+    if request.POST.get('action') == 'post':
+        year1 = request.POST.get('year1')
+        year2 = request.POST.get('year2')
+        revenue1 = request.POST.get('revenue1')
+        revenue2 = request.POST.get('revenue2')
+        operations1 = request.POST.get('operations1')
+        operations2 = request.POST.get('operations2')
+        profitTax1 = request.POST.get('profitTax1')
+        profitTax2 = request.POST.get('profitTax2')
+        tax1 = request.POST.get('tax1')
+        tax2 = request.POST.get('tax2')
+        profit1 = request.POST.get('profit1')
+        profit2 = request.POST.get('profit2')
+
+        response_data['year1'] = year1
+        response_data['year2'] = year2
+        response_data['revenue1'] = revenue1
+        response_data['revenue2'] = revenue2
+        response_data['operations1'] = operations1
+        response_data['operations2'] = operations2
+        response_data['profitTax1'] = profitTax1
+        response_data['profitTax2'] = profitTax2
+        response_data['tax1'] = tax1
+        response_data['tax2'] = tax2
+        response_data['profit1'] = profit2
+        response_data['profit2'] = profit2
 
 
+        IncomeStatement.objects.create(
+            year1 = year1,
+            year2 = year2,
+            revenue1 = revenue1,
+            revenue2 = revenue2,
+            operations1 = operations1,
+            operations2 = operations2,
+            profitTax1 = profitTax1,
+            profitTax2 = profitTax2,
+            tax1 = tax1,
+            tax2 = tax2,
+            profit1 = profit1,
+            profit2 = profit2,
+            )
+        return JsonResponse(response_data)
+
+    return render(request, 'view.html')   
+
+def feedback(request):
+    if request.POST:
+        form = AddFieldForm(request.POST)
+       # form = ContactForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            data = form.cleaned_data
+            return JsonResponse(data)
+            return JsonResponse({'success':True}) 
+
+
+        else:
+            return JsonResponse({'error':form.errors})
+    return HttpResponseRedirect('')
+  
+def add(request):
+    return render(request, 'add.html')
+
+#              
+#           

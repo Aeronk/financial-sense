@@ -1,0 +1,66 @@
+        {% block form %}
+        <form method="post" action="/save/"  enctype="multipart/form-data" class="form" id="post-form1">
+        {% csrf_token %}
+        <table class="table table-striped">
+          <thead>
+         
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Income Statement For The Period </th>
+              <td><input value="Period Date" type="text" class="form-control" name='year1'  ></td>
+              <td><input value="Period Date" type="text" class="form-control" name='year2'  ></td>
+      
+              
+            </tr>
+          </thead>
+          <tbody   id="try">
+            <tr>
+              <th scope="row">1</th>
+              <td>Total Revenue</td>
+
+              <td><input value=0 type="text" class="form-control" name='revenue1' id="id_revenue2" ></td>
+              <td><input value=1 type="text" class="form-control" name='revenue1' id="id_revenue2" ></td>
+      
+
+            </tr>
+      <!--      <tr>
+              <th scope="row">2</th>
+              <td>Total Expenses</td>
+              {% for value  in year %}
+              <td><input type="number" value={{value}} class="form-control" id="y{{ forloop.counter}}" ></td>
+               {% endfor %}
+              
+            </tr>  year,revenue,operations,profitTax,tax,profit  --> 
+            <tr>
+              <th scope="row">2</th>
+              <td>Profit from Operations</td>
+              <td><input type="text" value=0 class="form-control" name="operations1" ></td>
+              <td><input type="text" value=0 class="form-control" name="operations2" ></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Profit before Tax</td>
+
+              <td><input type="text" value=1 class="form-control" name="profitTax1" ></td>
+              <td><input type="text" value=2 class="form-control" name="profitTax2" ></td>
+
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Tax</td>
+              <td><input type="text" value=0 class="form-control" name="tax1"></td>
+              <td><input type="text" value=0 class="form-control" name="tax2"></td>
+
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Income for the Year</td>
+              <td><input type="text" value=0 class="form-control" name="profit1"></td>
+              <td><input type="text" value=0 class="form-control" name="profit2"></td>
+
+          </tbody>
+        </table>
+        </form>
+  {% endblock %}  
+
+
