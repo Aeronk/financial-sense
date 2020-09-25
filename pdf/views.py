@@ -454,5 +454,8 @@ def feedback(request):
 def add(request):
     return render(request, 'add.html')
 
+def kanban(request):
+    return render(request, 'drag.html')    
+
 #              
 #           

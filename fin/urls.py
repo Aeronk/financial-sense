@@ -28,6 +28,7 @@ urlpatterns = [
     path('feedback/',views.feedback,name="feedback"),
     path('save/', views.save),
     path('admin/', admin.site.urls),
+    path('ngoni/', views.kanban),
 ]
 
 if settings.DEBUG: 
